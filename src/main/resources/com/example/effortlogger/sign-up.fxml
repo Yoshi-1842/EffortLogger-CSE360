@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="318.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.SignUpController">
+   <children>
+      <Label layoutX="38.0" layoutY="37.0" text="Welcome to the Effort LoggerTool">
+         <font>
+            <Font size="21.0" />
+         </font></Label>
+      <Label layoutX="38.0" layoutY="77.0" text="Sign Up Page" />
+      <Label layoutX="38.0" layoutY="107.0" text="Username:" />
+      <Label layoutX="39.0" layoutY="146.0" text="Password:" />
+      <Label layoutX="38.0" layoutY="184.0" text="Name:" />
+      <Label layoutX="36.0" layoutY="226.0" text="Last Name:" />
+      <TextField fx:id="txt_username" layoutX="109.0" layoutY="103.0" />
+      <TextField fx:id="txt_password" layoutX="109.0" layoutY="142.0" />
+      <TextField fx:id="txt_Name" layoutX="110.0" layoutY="180.0" />
+      <TextField fx:id="txt_lastName" layoutX="110.0" layoutY="222.0" />
+      <Button fx:id="btn_signup" layoutX="80.0" layoutY="268.0" mnemonicParsing="false" text="Sign Up" />
+      <Label layoutX="196.0" layoutY="272.0" text="Already a member?" />
+      <Button fx:id="btn_backLogIn" layoutX="315.0" layoutY="268.0" mnemonicParsing="false" text="Log In!" />
+   </children>
+</AnchorPane>

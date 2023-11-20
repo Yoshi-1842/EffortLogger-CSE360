@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.HelloController">
+<children>
+   <Label layoutX="22.0" layoutY="29.0" text="EfforLogger Tool ">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="22.0" layoutY="56.0" prefHeight="28.0" prefWidth="94.0" text="Login Page">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="116.0" layoutY="137.0" text="Username:" />
+      <Label layoutX="118.0" layoutY="174.0" text="Password:" />
+      <TextField fx:id="txt_Username" layoutX="194.0" layoutY="133.0" />
+      <TextField fx:id="txt_Password" layoutX="195.0" layoutY="170.0" />
+      <Button fx:id="btn_login" layoutX="195.0" layoutY="236.0" mnemonicParsing="false" text="Log In!" />
+      <Button fx:id="btn_sign_up" layoutX="292.0" layoutY="236.0" mnemonicParsing="false" text="Sign Up!" />
+</children>
+</AnchorPane>

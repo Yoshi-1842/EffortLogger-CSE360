@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.LoggedInController">
+   <children>
+      <Label fx:id="lbl_welcome1" layoutX="42.0" layoutY="38.0" text="Welcome to the Effort LoggerTool">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <Label fx:id="lbl_welcome2" layoutX="84.0" layoutY="110.0" text="We are working to implement the tool here!" />
+      <Button fx:id="btn_logout" layoutX="173.0" layoutY="167.0" mnemonicParsing="false" text="Logout" />
+   </children>
+</AnchorPane>
