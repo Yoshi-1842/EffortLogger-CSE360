@@ -52,7 +52,8 @@ public class DataBaseUtils {
         PreparedStatement psCheckUserExists = null;
         ResultSet resultSet = null;
 
-        try{
+        try{ //In this part you will have to connect your own database using MySQL, the "jdbc:mysql://localhost:3306/effort-logger","root"
+            // is the same, what is gonna change is the password!!!
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort-logger","root","Pontiac1842#");
             psCheckUserExists = connection.prepareStatement("SELECT * FROM user_information WHERE username =?");
             psCheckUserExists.setString(1,username);
@@ -111,7 +112,8 @@ public class DataBaseUtils {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        try {
+        try {//In this part you will have to connect your own database using MySQL, the "jdbc:mysql://localhost:3306/effort-logger","root"
+            // is the same, what is gonna change is the password!!!
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/effort-logger", "root", "Pontiac1842#");
             preparedStatement = connection.prepareStatement("SELECT password, name FROM user_information WHERE username = ?");
             preparedStatement.setString(1, username);

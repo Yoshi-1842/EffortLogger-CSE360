@@ -18,6 +18,8 @@ public class LoggedInController implements Initializable {
     private Label lbl_welcome1;
     @FXML
     private Label lbl_welcome2;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_logout.setOnAction(new EventHandler<ActionEvent>() {
