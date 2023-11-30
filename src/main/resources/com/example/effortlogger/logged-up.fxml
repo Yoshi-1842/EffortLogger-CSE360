@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.LoggedInController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.LoggedInController">
    <children>
-      <TabPane prefHeight="487.0" prefWidth="678.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab text="Effort Console">
               <content>
@@ -42,45 +35,9 @@
             </content>
           </Tab>
           <Tab text="Defect Console">
-               <content>
-                  <ScrollPane fx:id="ScrollPane" prefHeight="472.0" prefWidth="783.0">
-                    <content>
-                      <AnchorPane fx:id="ChoiceBox5" minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="684.0">
-                           <children>
-                              <Text fx:id="myText1" layoutX="32.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1.Select the Project" />
-                              <Text fx:id="myText2" layoutX="396.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.a.Clear this roject's Defect Log" />
-                              <Text fx:id="myText3" layoutX="32.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.b. Select one of the following defects to make it the current Defects or press &quot;Create a New Defect&quot;" />
-                              <ChoiceBox fx:id="choiceBox1" layoutX="32.0" layoutY="55.0" prefWidth="150.0" />
-                              <Button fx:id="button1" layoutX="413.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Clear the Defect Log" />
-                              <ChoiceBox fx:id="choicebox2" layoutX="32.0" layoutY="116.0" prefWidth="150.0" />
-                              <Button fx:id="button2" layoutX="391.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="Create a New defect" />
-                              <Text layoutX="32.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3.Define or update the following Current Defect attributes:" />
-                              <Text layoutX="424.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status: Open" />
-                              <Text layoutX="42.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Num" />
-                              <Text layoutX="83.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defect Name" />
-                              <Text layoutX="42.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                              <TextField fx:id="textField1" layoutX="67.0" layoutY="193.0" prefHeight="25.0" prefWidth="230.0" />
-                              <Button fx:id="button3a" layoutX="387.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Close" />
-                              <Button fx:id="button4a" layoutX="477.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Reopen" />
-                              <Text layoutX="32.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defect Symptoms or Cause/Resolution" wrappingWidth="279.9296875" />
-                              <TextField layoutX="43.0" layoutY="249.0" prefHeight="44.0" prefWidth="538.0" />
-                              <Text layoutX="32.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Steps When injected" />
-                              <Text layoutX="242.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Steps when removed" />
-                              <Text layoutX="449.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defect Category" />
-                              <ChoiceBox fx:id="choiceBox3" layoutX="22.0" layoutY="322.0" prefWidth="150.0" />
-                              <ChoiceBox fx:id="choiceBox4" layoutX="222.0" layoutY="322.0" prefWidth="150.0" />
-                              <ChoiceBox fx:id="choiceBox5" layoutX="425.0" layoutY="322.0" prefWidth="150.0" />
-                              <Text layoutX="360.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fix: " />
-                              <ChoiceBox fx:id="ChoiceBox6" layoutX="425.0" layoutY="357.0" prefWidth="150.0" />
-                              <Text layoutX="21.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4.Press the &quot;Update the Current Defect&quot; to save the changes made above." />
-                              <Button fx:id="button5a" layoutX="29.0" layoutY="421.0" mnemonicParsing="false" text="Update the Current Defect" />
-                              <Button fx:id="button6a" layoutX="204.0" layoutY="421.0" mnemonicParsing="false" text="Delete the Current Defect" />
-                              <Button fx:id="button7a" layoutX="370.0" layoutY="421.0" mnemonicParsing="false" text="Proceed to the Effort Log Console" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </ScrollPane>
-               </content>
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
           </Tab>
             <Tab text="Logs">
               <content>
@@ -97,25 +54,6 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Planning Poker">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fx:id="myImage" fitHeight="150.0" fitWidth="200.0" layoutX="191.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@1_sBMbsWH5tCzEmerxyHs1Rw.jpg" />
-                           </image>
-                        </ImageView>
-                        <Text layoutX="153.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Planning Poker">
-                           <font>
-                              <Font name="Cooper Black" size="21.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="MyButton" layoutX="265.0" layoutY="268.0" mnemonicParsing="false" text="+New Game" />
-                     </children></AnchorPane>
-                </content>
-            </Tab>
-                
         </tabs>
       </TabPane>
    </children>
