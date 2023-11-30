@@ -1,261 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Chris was here  -->
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.LoggedInController">
-    <children>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Effort Console">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.LoggedInController">
+   <children>
+      <TabPane prefHeight="487.0" prefWidth="678.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Effort Console">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_logout" layoutX="523.0" layoutY="314.0" mnemonicParsing="false" text="Logout" />
+                        <Label fx:id="lbl_welcome1" layoutX="14.0" layoutY="20.0" text="Welcome to the Effort LoggerTool" />
+                        <Label layoutX="22.0" layoutY="47.0" text="1. When you start a new activity, press the &quot;Start an Activity&quot; button" />
+                        <Button fx:id="btn_StartActivity" layoutX="398.0" layoutY="43.0" mnemonicParsing="false" text="Start an Activity" />
+                        <Label layoutX="22.0" layoutY="82.0" text="2. Select the project, life cycle step, effort category, and deliverable from the following lists:" />
+                        <Label layoutX="31.0" layoutY="126.0" text="Project:" />
+                        <Label layoutX="320.0" layoutY="126.0" text="Life Cycle Step:" />
+                        <Label layoutX="29.0" layoutY="186.0" text="Effort Category:" />
+                        <Label layoutX="29.0" layoutY="242.0" text="3. Press the &quot;Stop this Activity&quot; to create an effort log entry using the attributes above." />
+                        <Button fx:id="btn_StopActivity" layoutX="490.0" layoutY="238.0" mnemonicParsing="false" text="Stop Activity" />
+                        <Label layoutX="29.0" layoutY="276.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 before resuming work." />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="EffortLog Console">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Defect Console">
+               <content>
+                  <ScrollPane fx:id="ScrollPane" prefHeight="472.0" prefWidth="783.0">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Button fx:id="btn_logout" layoutX="523.0" layoutY="314.0" mnemonicParsing="false" text="Logout" />
-                                <Label fx:id="lbl_welcome1" layoutX="14.0" layoutY="20.0" text="Welcome to the Effort LoggerTool">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font></Label>
-                                <Label layoutX="22.0" layoutY="47.0" text="1. When you start a new activity, press the &quot;Start an Activity&quot; button" />
-                                <Button fx:id="btn_StartActivity" layoutX="410.0" layoutY="43.0" mnemonicParsing="false" text="Start an Activity" />
-                                <Label layoutX="22.0" layoutY="82.0" text="2. Select the project, life cycle step, effort category, and deliverable from the following lists:" />
-                                <Label layoutX="31.0" layoutY="126.0" text="Project:" />
-                                <Label layoutX="320.0" layoutY="126.0" text="Life Cycle Step:" />
-                                <Label layoutX="29.0" layoutY="186.0" text="Effort Category:" />
-                                <Label layoutX="34.0" layoutY="255.0" text="3. Press the &quot;Stop this Activity&quot; to create an effort log entry using the attributes above." />
-                                <Button fx:id="btn_StopActivity" layoutX="502.0" layoutY="251.0" mnemonicParsing="false" text="Stop Activity" />
-                                <Label layoutX="26.0" layoutY="285.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 before resuming work." />
-                        <ChoiceBox fx:id="projectBoxConsole" layoutX="88.0" layoutY="122.0" prefWidth="150.0" />
-                        <ChoiceBox fx:id="lifeCycleBoxConsole" layoutX="410.0" layoutY="122.0" prefWidth="150.0" />
-                        <ChoiceBox fx:id="effortCategoryBoxConsole" layoutX="120.0" layoutY="182.0" prefWidth="150.0" />
-                        <Label layoutX="320.0" layoutY="186.0" text="Plan:" />
-                        <ChoiceBox fx:id="planBoxConsole" layoutX="360.0" layoutY="182.0" prefWidth="150.0" />
-                        <Label fx:id="txt_clockState" layoutX="476.0" layoutY="20.0" text="Clock is Stopped" textFill="RED">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="tf_OtherConsole" layoutX="48.0" layoutY="217.0" prefHeight="26.0" prefWidth="503.0" promptText="Explain" />
-                        <Label layoutX="485.0" layoutY="348.0" text="\@ASU 2023 YSHCR">
-                           <font>
-                              <Font name="System Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="348.0" text="Version 2.0 ">
-                           <font>
-                              <Font name="System Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="timetest" layoutX="346.0" layoutY="339.0" text="to Start">
-                           <font>
-                              <Font name="System Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="187.0" layoutY="339.0" text="Date:">
-                           <font>
-                              <Font name="System Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="306.0" layoutY="339.0" text="Time:">
-                           <font>
-                              <Font name="System Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="txt_DateStart" layoutX="238.0" layoutY="339.0" text="to Start">
-                           <font>
-                              <Font name="System Italic" size="12.0" />
-                           </font>
-                        </Label>
-                            </children>
+                      <AnchorPane fx:id="ChoiceBox5" minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="684.0">
+                           <children>
+                              <Text fx:id="myText1" layoutX="32.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1.Select the Project" />
+                              <Text fx:id="myText2" layoutX="396.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.a.Clear this roject's Defect Log" />
+                              <Text fx:id="myText3" layoutX="32.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.b. Select one of the following defects to make it the current Defects or press &quot;Create a New Defect&quot;" />
+                              <ChoiceBox fx:id="choiceBox1" layoutX="32.0" layoutY="55.0" prefWidth="150.0" />
+                              <Button fx:id="button1" layoutX="413.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Clear the Defect Log" />
+                              <ChoiceBox fx:id="choicebox2" layoutX="32.0" layoutY="116.0" prefWidth="150.0" />
+                              <Button fx:id="button2" layoutX="391.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="Create a New defect" />
+                              <Text layoutX="32.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3.Define or update the following Current Defect attributes:" />
+                              <Text layoutX="424.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status: Open" />
+                              <Text layoutX="42.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Num" />
+                              <Text layoutX="83.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defect Name" />
+                              <Text layoutX="42.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                              <TextField fx:id="textField1" layoutX="67.0" layoutY="193.0" prefHeight="25.0" prefWidth="230.0" />
+                              <Button fx:id="button3a" layoutX="387.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Close" />
+                              <Button fx:id="button4a" layoutX="477.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Reopen" />
+                              <Text layoutX="32.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defect Symptoms or Cause/Resolution" wrappingWidth="279.9296875" />
+                              <TextField layoutX="43.0" layoutY="249.0" prefHeight="44.0" prefWidth="538.0" />
+                              <Text layoutX="32.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Steps When injected" />
+                              <Text layoutX="242.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Steps when removed" />
+                              <Text layoutX="449.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Defect Category" />
+                              <ChoiceBox fx:id="choiceBox3" layoutX="22.0" layoutY="322.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="choiceBox4" layoutX="222.0" layoutY="322.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="choiceBox5" layoutX="425.0" layoutY="322.0" prefWidth="150.0" />
+                              <Text layoutX="360.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fix: " />
+                              <ChoiceBox fx:id="ChoiceBox6" layoutX="425.0" layoutY="357.0" prefWidth="150.0" />
+                              <Text layoutX="21.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4.Press the &quot;Update the Current Defect&quot; to save the changes made above." />
+                              <Button fx:id="button5a" layoutX="29.0" layoutY="421.0" mnemonicParsing="false" text="Update the Current Defect" />
+                              <Button fx:id="button6a" layoutX="204.0" layoutY="421.0" mnemonicParsing="false" text="Delete the Current Defect" />
+                              <Button fx:id="button7a" layoutX="370.0" layoutY="421.0" mnemonicParsing="false" text="Proceed to the Effort Log Console" />
+                           </children>
                         </AnchorPane>
                     </content>
-                </Tab>
-                <Tab text="Effort Log Editor">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label layoutX="34.0" layoutY="24.0" text="1. Select the Project in order to edit its Effort Log.">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="367.0" layoutY="24.0" text="2.a. Clear this Project's Effort Log.">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="34.0" layoutY="116.0" text="3.a. Modify the Current Effort Log Entry's attributes and press &quot;Update This Entry&quot; when finished.">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="34.0" layoutY="69.0" text="2.b. Select the Effort Log Entry to be modified and make it the Current Effort Log Entry.">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="53.0" layoutY="152.0" text="Date:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="206.0" layoutY="152.0" text="Start Time:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="386.0" layoutY="152.0" text="Stop Time:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="57.0" layoutY="186.0" text="Life Cycle Step:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="55.0" layoutY="231.0" text="Effort Category:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="35.0" layoutY="273.0" text="3.b. Delete the current Effort Log Entry">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="34.0" layoutY="319.0" text="3.c. Split the current Effort Log Entry into two entries">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="359.0" layoutY="319.0" text="4. Proceed to the Effort Log Console">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <Button fx:id="btn_ClearEffortLog" layoutX="394.0" layoutY="41.0" mnemonicParsing="false" text="Clear This Effort Log" />
-                                <Button fx:id="btn_UpdateEntry" layoutX="472.0" layoutY="248.0" mnemonicParsing="false" text="Update This Entry" />
-                                <Button fx:id="btn_DeleteEntry" layoutX="57.0" layoutY="290.0" mnemonicParsing="false" text="Delete This Entry" />
-                                <Button fx:id="btn_SplitEntry" layoutX="56.0" layoutY="336.0" mnemonicParsing="false" text="Split this Entry into Two Entries" />
-                                <Button fx:id="btn_Proceed" layoutX="358.0" layoutY="336.0" mnemonicParsing="false" text="Proceed to the Effort Log Console" />
-                                <TextField fx:id="tf_Date" layoutX="83.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" promptText="yyyy-mm-dd" />
-                                <TextField fx:id="tf_StartTime" layoutX="268.0" layoutY="148.0" prefHeight="25.0" prefWidth="112.0" promptText="hh:mm:ss" />
-                                <TextField fx:id="tf_StopTime" layoutX="447.0" layoutY="148.0" prefHeight="25.0" prefWidth="113.0" promptText="hh:mm:ss" />
-                                <ChoiceBox fx:id="projectBox" layoutX="46.0" layoutY="41.0" prefWidth="150.0" />
-                                <ChoiceBox fx:id="lifeCycleBox" layoutX="57.0" layoutY="203.0" prefWidth="150.0" />
-                                <ChoiceBox fx:id="effortCategoryBox" layoutX="57.0" layoutY="248.0" prefWidth="150.0" />
-                                <ChoiceBox fx:id="planBox" layoutX="217.0" layoutY="248.0" prefHeight="25.0" prefWidth="242.0" />
-                                <Label layoutX="217.0" layoutY="231.0" text="Plan:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="tf_Other" layoutX="218.0" layoutY="203.0" prefHeight="25.0" prefWidth="360.0" promptText="Explain" />
-                                <ChoiceBox fx:id="currentLogEntryBox" layoutX="46.0" layoutY="91.0" prefHeight="25.0" prefWidth="481.0" />
-                            </children></AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Defect Console">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
-                <Tab text="Logs">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView fx:id="table" layoutX="3.0" layoutY="31.0" prefHeight="273.0" prefWidth="594.0">
-                                    <columns>
-                                        <TableColumn fx:id="index" prefWidth="75.0" text="Index" />
-                                        <TableColumn fx:id="data" prefWidth="75.0" text="Data" />
-                                        <TableColumn fx:id="start" prefWidth="75.0" text="Start" />
-                                        <TableColumn fx:id="stop1" prefWidth="75.0" text="Stop" />
-                                        <TableColumn fx:id="lifecycle" prefWidth="96.0" text="LifeCycle Step" />
-                                        <TableColumn fx:id="cat" prefWidth="95.0" text="Category" />
-                                        <TableColumn fx:id="deliverable" prefWidth="101.0" text="Deliverable/Interruption/etc" />
-                                    </columns>
-                                </TableView>
-                                <Label layoutX="24.0" layoutY="14.0" text="Effort Log for Project1: " />
-                            </children></AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Definitions">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView fx:id="spn" layoutX="22.0" layoutY="29.0" prefHeight="119.0" prefWidth="331.0">
-                                    <columns>
-                                        <TableColumn fx:id="name" prefWidth="116.0" text="Name" />
-                                        <TableColumn fx:id="one" prefWidth="34.0" text="1" />
-                                        <TableColumn fx:id="two" prefWidth="37.0" text="2" />
-                                        <TableColumn fx:id="three" prefWidth="33.0" text="3" />
-                                        <TableColumn fx:id="four" prefWidth="35.0" text="4" />
-                                        <TableColumn fx:id="five" prefWidth="34.0" text="5" />
-                                        <TableColumn fx:id="six" prefWidth="54.0" text="6" />
-                                    </columns>
-                                </TableView>
-                                <Label layoutX="22.0" layoutY="6.0" text="1. Specific Project Name:" />
-                                <TableView fx:id="lifec" layoutX="21.0" layoutY="156.0" prefHeight="106.0" prefWidth="334.0">
-                                    <columns>
-                                        <TableColumn fx:id="specifyLC" prefWidth="269.0" text="2. Specify the Lifecycle Steps here:" />
-                                        <TableColumn fx:id="E" prefWidth="31.0" text="E" />
-                                        <TableColumn fx:id="D" prefWidth="33.0" text="D" />
-                                    </columns>
-                                </TableView>
-                                <TableView fx:id="specifye" layoutX="22.0" layoutY="266.0" prefHeight="89.0" prefWidth="337.0">
-                                    <columns>
-                                        <TableColumn fx:id="specifyEC" prefWidth="336.0" text="3. Specify the Effort Categories Here:" />
-                                    </columns>
-                                </TableView>
-                                <TableView fx:id="specifyplan" layoutX="371.0" layoutY="15.0" prefHeight="102.0" prefWidth="200.0">
-                                    <columns>
-                                        <TableColumn fx:id="plans" prefWidth="197.0" text="4. Specify the Plans Here: " />
-                                    </columns>
-                                </TableView>
-                                <TableView fx:id="specifyd" layoutX="371.0" layoutY="127.0" prefHeight="200.0" prefWidth="200.0">
-                                    <columns>
-                                        <TableColumn fx:id="deliver" prefWidth="198.0" text="5. Specify the Deliverables" />
-                                    </columns>
-                                </TableView>
-                            </children></AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Log Manager">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
-                <Tab text="Report">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TextField fx:id="tf_Reports" alignment="TOP_LEFT" layoutX="57.0" layoutY="54.0" prefHeight="163.0" prefWidth="492.0" />
-                                <Button fx:id="btn_SubmitReport" layoutX="57.0" layoutY="248.0" mnemonicParsing="false" text="Submit Report" />
-                                <Button fx:id="btn_DisplayReports" layoutX="433.0" layoutY="248.0" mnemonicParsing="false" text="Display All Reports" />
-                                <Label layoutX="63.0" layoutY="30.0" text="State the issue you are having and how you discovered it:">
-                                    <font>
-                                        <Font name="System Bold" size="12.0" />
-                                    </font>
-                                </Label>
-                            </children></AnchorPane>
-
-
-
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
+                  </ScrollPane>
+               </content>
+          </Tab>
+            <Tab text="Logs">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Definitions">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Log Manager">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Planning Poker">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="myImage" fitHeight="150.0" fitWidth="200.0" layoutX="191.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@1_sBMbsWH5tCzEmerxyHs1Rw.jpg" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="153.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Planning Poker">
+                           <font>
+                              <Font name="Cooper Black" size="21.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="MyButton" layoutX="265.0" layoutY="268.0" mnemonicParsing="false" text="+New Game" />
+                     </children></AnchorPane>
+                </content>
+            </Tab>
+                
+        </tabs>
+      </TabPane>
+   </children>
 </StackPane>
