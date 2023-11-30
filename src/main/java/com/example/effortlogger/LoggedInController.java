@@ -1,5 +1,6 @@
 package com.example.effortlogger;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,23 +15,48 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 
 public class LoggedInController implements Initializable {
-
+    //Efort Console
     @FXML
     private Button btn_logout;
     @FXML
     private Label lbl_welcome1;
+    @FXML
+    private ChoiceBox<String> lifeCycleBoxConsole;
+    @FXML
+    private ChoiceBox<String> effortCategoryBoxConsole;
+    @FXML
+    private ChoiceBox<String> planBoxConsole;
+    @FXML
+    private ChoiceBox<String> projectBoxConsole;
+    @FXML
+    private Button btn_StartActivity;
+    @FXML
+    private Button btn_StopActivity;
+    @FXML
+    private TextField tf_OtherConsole;
+    @FXML
+    private Label txt_clockState;
+    @FXML
+    private Label timetest;
+    @FXML
+    private  Label txt_DateStart;
+
+    private volatile boolean stop;
+
+    //Effort Log Editor
     @FXML
     private Button btn_SubmitReport;
     @FXML
@@ -62,6 +88,7 @@ public class LoggedInController implements Initializable {
     @FXML
     private ChoiceBox<String> projectBox;
 
+
     private List<String> reportsList = new ArrayList<>();
 
     // ListView for displaying reports
@@ -69,6 +96,7 @@ public class LoggedInController implements Initializable {
 
     // Options for Defects
     ObservableList<String> projectList = FXCollections.observableArrayList("Business Project", "Development Project");
+
     // Options for Life Cycle
     ObservableList<String> lifeCycleList = FXCollections.observableArrayList("Planning", "Information Gathering", "Information Understanding",
             "Verifying", "Outlining", "Drafting", "Finalizing", "Team Meeting", "Coach Meeting", "Stakeholder Meeting");
@@ -120,27 +148,51 @@ public class LoggedInController implements Initializable {
                 }
             }
         });
-    	
-    	// Set default items for projectBox
+
+    	    // Set default items for projectBox
+        //Effort Console
+        projectBoxConsole.setItems(projectList);
+        projectBoxConsole.setValue("Business Project");
+        //Effort Log Editor
         projectBox.setItems(projectList);
         projectBox.setValue("Business Project");
         
-    	// Set default items for lifeCycleBox
+    	    // Set default items for lifeCycleBox
+        //Effort Console
+        lifeCycleBoxConsole.setItems(lifeCycleList);
+        lifeCycleBoxConsole.setValue("Planning");
+        //Effort Log Editor
         lifeCycleBox.setItems(lifeCycleList);
         lifeCycleBox.setValue("Planning");
         
-        // Set default items for effortCategoryBox
+            // Set default items for effortCategoryBox
+        //Effort Console
+        effortCategoryBoxConsole.setItems(effortCategoryList);
+        effortCategoryBoxConsole.setValue("Plans");
+        //Effort Log Editor
         effortCategoryBox.setItems(effortCategoryList);
         effortCategoryBox.setValue("Plans");
 
-        // Set default items for planBox
+         // Set default items for planBox
+        //Effort Console
+        planBoxConsole.setItems(plansList);
+        planBoxConsole.setValue("Project Plan");
+        //Effort Log Editor
         planBox.setItems(plansList);
         planBox.setValue("Project Plan");
 
         // Initially hide tf_Other
+        tf_OtherConsole.setVisible(false);
         tf_Other.setVisible(false);
 
-        // Listener for the effortCategoryBox selection change
+
+        // Listener for the effortCategoryBox selection change in Console and Editor
+        effortCategoryBoxConsole.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                updatePlanBoxItemsConsole();
+            }
+        });
         effortCategoryBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -148,12 +200,49 @@ public class LoggedInController implements Initializable {
             }
         });
 
+
+        btn_StartActivity.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                //State of clock
+                txt_clockState.setText("Clock Running!!");
+                txt_clockState.setTextFill(Color.GREEN);
+                Timenow();
+                Date();
+
+
+
+            }
+        });
         btn_logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 DataBaseUtils.changeScene(actionEvent, "hello-view.fxml", null, "Log In!");
             }
         });
+
+        btn_StopActivity.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                txt_clockState.setText("Clock STOPPED!!");
+                txt_clockState.setTextFill(Color.RED);
+                stop = true;
+
+                // Get the selected values from the choice boxes WHILE THEY CAN BE USED IN NEXT STEPS
+                String selectedLifeCycle = lifeCycleBoxConsole.getValue();
+                String selectedEffortCategory = effortCategoryBoxConsole.getValue();
+                String selectedPlan = planBoxConsole.getValue();
+                System.out.println("life CycleBox " + selectedLifeCycle);
+                System.out.println("life EfforCategory " + selectedEffortCategory);
+                System.out.println("life Plan " + selectedPlan);
+                System.out.println(timestoped);// SAM USE THIS VARIABLE
+                System.out.println(datestoped);
+            }
+        });
+
+
+
 
         btn_SubmitReport.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
@@ -189,6 +278,8 @@ public class LoggedInController implements Initializable {
              }
         });
 
+
+
         btn_DisplayReports.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -197,6 +288,32 @@ public class LoggedInController implements Initializable {
             }
         });
     }
+
+    String timestoped = "";
+    public void Timenow(){
+        Thread thread = new Thread(() -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+            while (!stop){
+                try{
+                    Thread.sleep(1000);
+                }catch(Exception e){
+                    System.out.println("e");
+                }
+                timestoped= sdf.format(new Date());
+                Platform.runLater(() -> {
+                    timetest.setText(timestoped);
+                });
+            }
+        });
+        thread.start();
+    }
+    String datestoped = "";
+    public void Date(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        datestoped = sdf.format(new Date());
+        txt_DateStart.setText(datestoped);
+    }
+
 
     public void setUserInformation(String username) {
         lbl_welcome1.setText("Welcome to the Effort LoggerTool " + username + " !");
@@ -231,36 +348,82 @@ public class LoggedInController implements Initializable {
         // Show the stage
         reportsStage.show();
     }
-
+    private void updatePlanBoxItemsConsole() {
+        // Update the items in the planBox based on the selected option in the effortCategoryBox
+        String selectedEffortCategoryConsole = effortCategoryBoxConsole.getValue();
+        switch (selectedEffortCategoryConsole) {
+            case "Plans":
+                //Console
+                planBoxConsole.setItems(plansList);
+                planBoxConsole.setValue("Project Plan");
+                tf_OtherConsole.setVisible(false); // Hide tf_Other
+                planBoxConsole.setDisable(false);
+                break;
+            case "Deliverables":
+                //Console
+                planBoxConsole.setItems(deliverablesList);
+                planBoxConsole.setValue("Conceptual Design");
+                tf_OtherConsole.setVisible(false); // Hide tf_Other
+                planBoxConsole.setDisable(false);
+                break;
+            case "Interruptions":
+                //Console
+                planBoxConsole.setItems(interruptionsList);
+                planBoxConsole.setValue("Break");
+                tf_OtherConsole.setVisible(false); // Hide tf_Other
+                planBoxConsole.setDisable(false);
+                break;
+            case "Defects":
+                //Console
+                planBoxConsole.setItems(defectsList);
+                planBoxConsole.setValue("Break");
+                tf_OtherConsole.setVisible(false); // Hide tf_Other
+                planBoxConsole.setDisable(false);
+                break;
+            case "Other":
+                //Console
+                tf_OtherConsole.setVisible(true); // Show tf_Other
+                planBoxConsole.setDisable(true);
+                break;
+            default:
+                // Handle default case
+                break;
+        }
+    }
     private void updatePlanBoxItems() {
         // Update the items in the planBox based on the selected option in the effortCategoryBox
         String selectedEffortCategory = effortCategoryBox.getValue();
         switch (selectedEffortCategory) {
             case "Plans":
+                //Editor
                 planBox.setItems(plansList);
                 planBox.setValue("Project Plan");
                 tf_Other.setVisible(false); // Hide tf_Other
                 planBox.setDisable(false);
                 break;
             case "Deliverables":
+                //Editor
                 planBox.setItems(deliverablesList);
                 planBox.setValue("Conceptual Design");
                 tf_Other.setVisible(false); // Hide tf_Other
                 planBox.setDisable(false);
                 break;
             case "Interruptions":
+                //Editor
                 planBox.setItems(interruptionsList);
                 planBox.setValue("Break");
                 tf_Other.setVisible(false); // Hide tf_Other
                 planBox.setDisable(false);
                 break;
             case "Defects":
+                //Editor
                 planBox.setItems(defectsList);
                 planBox.setValue("Break");
                 tf_Other.setVisible(false); // Hide tf_Other
                 planBox.setDisable(false);
                 break;
             case "Other":
+                //Editor
                 tf_Other.setVisible(true); // Show tf_Other
                 planBox.setDisable(true);
                 break;
