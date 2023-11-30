@@ -12,6 +12,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.effortlogger.LoggedInController">
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
@@ -172,12 +174,62 @@
                 </Tab>
                 <Tab text="Logs">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="table" layoutX="3.0" layoutY="31.0" prefHeight="273.0" prefWidth="594.0">
+                                    <columns>
+                                        <TableColumn fx:id="index" prefWidth="75.0" text="Index" />
+                                        <TableColumn fx:id="data" prefWidth="75.0" text="Data" />
+                                        <TableColumn fx:id="start" prefWidth="75.0" text="Start" />
+                                        <TableColumn fx:id="stop1" prefWidth="75.0" text="Stop" />
+                                        <TableColumn fx:id="lifecycle" prefWidth="96.0" text="LifeCycle Step" />
+                                        <TableColumn fx:id="cat" prefWidth="95.0" text="Category" />
+                                        <TableColumn fx:id="deliverable" prefWidth="101.0" text="Deliverable/Interruption/etc" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="24.0" layoutY="14.0" text="Effort Log for Project1: " />
+                            </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Definitions">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="spn" layoutX="22.0" layoutY="29.0" prefHeight="119.0" prefWidth="331.0">
+                                    <columns>
+                                        <TableColumn fx:id="name" prefWidth="116.0" text="Name" />
+                                        <TableColumn fx:id="one" prefWidth="34.0" text="1" />
+                                        <TableColumn fx:id="two" prefWidth="37.0" text="2" />
+                                        <TableColumn fx:id="three" prefWidth="33.0" text="3" />
+                                        <TableColumn fx:id="four" prefWidth="35.0" text="4" />
+                                        <TableColumn fx:id="five" prefWidth="34.0" text="5" />
+                                        <TableColumn fx:id="six" prefWidth="54.0" text="6" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="22.0" layoutY="6.0" text="1. Specific Project Name:" />
+                                <TableView fx:id="lifec" layoutX="21.0" layoutY="156.0" prefHeight="106.0" prefWidth="334.0">
+                                    <columns>
+                                        <TableColumn fx:id="specifyLC" prefWidth="269.0" text="2. Specify the Lifecycle Steps here:" />
+                                        <TableColumn fx:id="E" prefWidth="31.0" text="E" />
+                                        <TableColumn fx:id="D" prefWidth="33.0" text="D" />
+                                    </columns>
+                                </TableView>
+                                <TableView fx:id="specifye" layoutX="22.0" layoutY="266.0" prefHeight="89.0" prefWidth="337.0">
+                                    <columns>
+                                        <TableColumn fx:id="specifyEC" prefWidth="336.0" text="3. Specify the Effort Categories Here:" />
+                                    </columns>
+                                </TableView>
+                                <TableView fx:id="specifyplan" layoutX="371.0" layoutY="15.0" prefHeight="102.0" prefWidth="200.0">
+                                    <columns>
+                                        <TableColumn fx:id="plans" prefWidth="197.0" text="4. Specify the Plans Here: " />
+                                    </columns>
+                                </TableView>
+                                <TableView fx:id="specifyd" layoutX="371.0" layoutY="127.0" prefHeight="200.0" prefWidth="200.0">
+                                    <columns>
+                                        <TableColumn fx:id="deliver" prefWidth="198.0" text="5. Specify the Deliverables" />
+                                    </columns>
+                                </TableView>
+                            </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Log Manager">
