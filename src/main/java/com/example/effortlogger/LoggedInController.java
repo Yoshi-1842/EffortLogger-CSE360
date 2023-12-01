@@ -25,7 +25,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//New Libraries
+//New Libraries for Training
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -33,6 +33,27 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import java.util.ResourceBundle;
 
+//New libraries for Planning Poker
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.util.List;
+import javafx.scene.Parent;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.io.IOException;
 
 public class LoggedInController implements Initializable {
     //Efort Console
@@ -191,6 +212,65 @@ public class LoggedInController implements Initializable {
     @FXML
     private Button btn_faq;
 
+    //Planning Poker
+    @FXML
+    private Text myText1;
+    @FXML
+    private Text myText2;
+    @FXML
+    private Text myText3;
+    @FXML
+    private Text myText4;
+    @FXML
+    private Text myText5;
+    @FXML
+    private Text myText6;
+    @FXML
+    private Text myText7;
+    @FXML
+    private Text myText8;
+    @FXML
+    private Text myText9;
+    @FXML
+    private Button button1;
+    @FXML
+    private Button button2;
+    @FXML
+    private Button button3;
+    @FXML
+    private Button button4;
+    @FXML
+    private Button button3a;
+    @FXML
+    private Button button4a;
+    @FXML
+    private Button button5a;
+    private boolean button5aPressed = false;
+    @FXML
+    private Button button6a;
+    @FXML
+    private Button MyButton;
+    @FXML
+    private TextField textField1;
+    @FXML
+    private TextField textField2;
+    @FXML
+    private ChoiceBox<String> choiceBox1;
+    @FXML
+    private ChoiceBox<String> choicebox2;
+    @FXML
+    private ChoiceBox<String> choiceBox3;
+    @FXML
+    private ChoiceBox<String> choiceBox4;
+    @FXML
+    private ChoiceBox<String> choiceBox5;
+    @FXML
+    private ChoiceBox<String> ChoiceBox6;
+
+    private String[] project = {"Planning Poker", "Development Project" };
+    private String[] injected = {"Test Case Generation","solution Specification", "Solution Review", "Solution Implementation","Unit/System First"};
+    private String[] removed = {"Problem Understanding","Conceptual Design Plan","Requirements","Conceptual Design","Conceptual Design Review"};
+    private String[] category = {"Not Specified","1.0 Documentation","2.0 Syntax","3.0 Build,Package","4.0 Assignment"};
 
     private List<String> reportsList = new ArrayList<>();
 
@@ -221,8 +301,137 @@ public class LoggedInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //Planing Poker Implementation
+        btn_logout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                DataBaseUtils.changeScene(actionEvent, "hello-view.fxml",null,"Log In!");
+            }
+        });
+        MyButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                openPlanningPokerPanel();
+            }
+
+            private void openPlanningPokerPanel() {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("planning-poker-view.fxml"));
+                    Parent root = loader.load();
+                    //PlanningPokerController PlanningPokerController = loader.getController();
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Planning Poker");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        choiceBox1.getItems().addAll(project);
+        button1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setHeaderText("Delete Confirmation");
+                alert.setContentText("Are you sure you want to delete?");
+
+                // Show the dialog and wait for the user's response
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        // User clicked 'OK', perform the delete operation
+                        System.out.println("Delete operation performed");
+                        // Add your delete logic here
+                    } else {
+                        // User clicked 'Cancel' or closed the dialog
+                        System.out.println("Delete operation canceled");
+                    }
+                });}});
+        button2.setOnAction(new EventHandler<ActionEvent> () {
+            public void handle(ActionEvent event) {
+                String enteredName = textField1.getText().trim();
+                if (!enteredName.isEmpty()) {
+                    // Check if the name is not empty
+
+                    // Check if the name is already in the choiceBox
+                    if (!choicebox2.getItems().contains(enteredName)) {
+                        choicebox2.getItems().add(enteredName);
+                        showAlert("Name added to ChoiceBox", enteredName + " has been added to ChoiceBox2.");
+                    } else {
+                        showAlert("Duplicate Name", enteredName + " is already in ChoiceBox2.");
+                    }
+                } else {
+                    showAlert("Empty Name", "Please enter a name in TextField1.");
+                }
+            }
+            private void showAlert(String title, String content) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle(title);
+                alert.setHeaderText(null);
+                alert.setContentText(content);
+                alert.showAndWait();
+            }
+
+        });
+        choiceBox3.getItems().addAll(injected);
+        choiceBox4.getItems().addAll(removed);
+        choiceBox5.getItems().addAll(category);
+
+
+
+
+
+        button2.setOnAction(new EventHandler<ActionEvent> () {
+            public void handle(ActionEvent event) {
+                String enteredName = textField1.getText().trim();
+                if (!enteredName.isEmpty()) {
+                    // Check if the name is not empty
+
+                    // Check if the name is already in the choiceBox
+                    if (!ChoiceBox6.getItems().contains(enteredName)) {
+                        ChoiceBox6.getItems().add(enteredName);
+                        showAlert("Name added to ChoiceBox", enteredName + " has been added to ChoiceBox2.");
+                    } else {
+                        showAlert("Duplicate Name", enteredName + " is already in ChoiceBox2.");
+                    }
+                } else {
+                    showAlert("Empty Name", "Please enter a name in TextField1.");
+                }
+            }
+            private void showAlert(String title, String content) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle(title);
+                alert.setHeaderText(null);
+                alert.setContentText(content);
+                alert.showAndWait();
+            }
+
+        });
+        setChoiceBoxEventHandler(choiceBox1);
+        setChoiceBoxEventHandler(choicebox2);
+        setChoiceBoxEventHandler(choiceBox3);
+        setChoiceBoxEventHandler(choiceBox4);
+        setChoiceBoxEventHandler(choiceBox5);
+        setChoiceBoxEventHandler(ChoiceBox6);
+
+        // Set up the event handler for button5a
+        button5a.setOnAction(event -> {
+            button5aPressed = true;
+            // Add your button5a event handling logic here
+        });
+
+        // Set up the event handler for button6a
+        button6a.setOnAction(event -> {
+            clearSelectedItems();
+            // Add any additional logic for button6a if needed
+        });
+
 
         //TRAINING AND SUPPORT IMPLEMENTATION
+
         btn_logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -942,6 +1151,48 @@ public class LoggedInController implements Initializable {
         txt_DateStart.setText(datestoped);
     }
 
+
+    //Planing Poker Functions
+    private void setChoiceBoxEventHandler(ChoiceBox<String> choiceBox) {
+        choiceBox.setOnAction(event -> {
+            if (!button5aPressed) {
+                showNotSavedPopup();
+            }
+            // Add your ChoiceBox event handling logic here
+        });
+    }
+    private void clearSelectedItems() {
+        for (ChoiceBox<String> choiceBox : List.of(choiceBox1, choicebox2, choiceBox3, choiceBox4, choiceBox5, ChoiceBox6)) {
+            choiceBox.getSelectionModel().clearSelection();
+        }
+    }
+    private void showNotSavedPopup() {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Attributes Not Saved");
+        alert.setContentText("Please press Update Current Defect to save the attributes.");
+        alert.showAndWait();
+
+        button3a.setOnAction(event -> {
+            saveDetailsAndCloseDefectConsole();
+            // Add any additional logic for button if needed
+        });
+
+        // ... (existing code)
+    }
+
+    private void saveDetailsAndCloseDefectConsole() {
+        // Add your logic to save details
+
+        // Close the defect console
+        closeDefectConsole();
+    }
+
+    @FXML
+    private void closeDefectConsole() {
+        // Close the defect console
+        System.exit(0);
+    }
 
     public void setUserInformation(String username) {
         lbl_welcome1.setText("Welcome to the Effort LoggerTool " + username + " !");
